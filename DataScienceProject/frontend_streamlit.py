@@ -2,17 +2,17 @@ import streamlit as st
 import pandas as pd
 from apriori_new import runApriori, dataFromFile, to_str_results
 
-st.markdown("# Apriori on 'primary tumor' dataset")
+st.markdown("# Dataset: Primary Tumor")
 
 st.sidebar.markdown(
     """The app is supposed to show information about my dataset and the rules that apriori algorithm found.
     The primary tumor domain was obtained from the University Medical Centre, Institute of Oncology, Ljubljana, Yugoslawia.
-    The dataset topic is primary cancer. The variables are categorical, therefore suitable for association rule mining."""
+    The dataset values are categorical, therefore suitable for association rule mining."""
 )
 
 default_csv = ("primary_tumor_data.csv")
 
-st.markdown('Here are some sample rows from the dataset:')
+st.markdown('For a first impression of the dataset see below:')
 csv_file = pd.read_csv(default_csv, header=None, lineterminator="\n")
 st.write(csv_file.head())
 st.markdown("The data was encoded in integers (339 instances, 18 attributes). The given description can be seen below.")
@@ -44,7 +44,7 @@ st.markdown(""" Attribute Information: (class is location of tumor)
 """)
 
 st.markdown('---')
-st.markdown("## Inputs")
+st.markdown("## Variables")
 
 st.markdown('''
             **Support** measures directly how often combinations of items occur.
@@ -59,11 +59,11 @@ support_helper = ''' > Support(A) = (Number of transactions in which A appears)/
 confidence_helper = ''' > Confidence(A->B) = Support(AUB)/Support(A)') '''
 st.markdown('---')
 
-support = st.slider("Enter the Minimum Support Value", min_value=0.1,
+support = st.slider("Minimum Support Value", min_value=0.1,
                     max_value=0.9, value=0.15,
                     help=support_helper)
 
-confidence = st.slider("Enter the Minimum Confidence Value", min_value=0.1,
+confidence = st.slider("Minimum Confidence Value", min_value=0.1,
                        max_value=0.9, value=0.6, help=confidence_helper)
 st.markdown('---')
 processed_csv = "preprocessed_data.csv"
